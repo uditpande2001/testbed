@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+
+# Environment Variables
+.env
+
+# Logs
+*.log
+
+# Temporary Files
+*.tmp
+
+# Parquet Files
+*.parquet
+
+# MinIO Local Storage
+storage/data-lake/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Pytest
+.pytest_cache/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Docker
+docker-data/
+
+# Local Config Overrides
+local_config.py
