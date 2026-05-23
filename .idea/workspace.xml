@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25bc806d-6222-4236-8b33-3da9d5538db8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/storage/lakehouse/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/lakehouse/minio_client.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/lakehouse/parquet_writer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/kakfa_config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/minio_config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/pipeline_config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ingestion/kafka_consumers/command_response_consumer.py" beforeDir="false" afterPath="$PROJECT_DIR$/ingestion/kafka_consumers/command_response_consumer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ingestion/kafka_consumers/raw_sensor_data_consumer.py" beforeDir="false" afterPath="$PROJECT_DIR$/ingestion/kafka_consumers/raw_sensor_data_consumer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/data-lake/.minio.sys/buckets/.bloomcycle.bin/xl.meta" beforeDir="false" afterPath="$PROJECT_DIR$/storage/data-lake/.minio.sys/buckets/.bloomcycle.bin/xl.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/data-lake/.minio.sys/buckets/.usage-cache.bin.bkp/xl.meta" beforeDir="false" afterPath="$PROJECT_DIR$/storage/data-lake/.minio.sys/buckets/.usage-cache.bin.bkp/xl.meta" afterDir="false" />
@@ -20,9 +21,9 @@
       <change beforePath="$PROJECT_DIR$/storage/data-lake/.minio.sys/buckets/processed/.usage-cache.bin/xl.meta" beforeDir="false" afterPath="$PROJECT_DIR$/storage/data-lake/.minio.sys/buckets/processed/.usage-cache.bin/xl.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/data-lake/.minio.sys/buckets/raw/.usage-cache.bin.bkp/xl.meta" beforeDir="false" afterPath="$PROJECT_DIR$/storage/data-lake/.minio.sys/buckets/raw/.usage-cache.bin.bkp/xl.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/data-lake/.minio.sys/buckets/raw/.usage-cache.bin/xl.meta" beforeDir="false" afterPath="$PROJECT_DIR$/storage/data-lake/.minio.sys/buckets/raw/.usage-cache.bin/xl.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/data-lake/.minio.sys/config/iam/sts/V63Z788H712DLDCP7JEB/identity.json/xl.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/data-lake/.minio.sys/tmp/0682be82-60a3-48f1-bde0-488013892d3c" beforeDir="false" afterPath="$PROJECT_DIR$/storage/data-lake/.minio.sys/tmp/66f9c2b1-9d2e-4e2a-bc29-654bc9e7097f" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/test_minio.py" beforeDir="false" afterPath="$PROJECT_DIR$/storage/test_minio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/data-lake/raw/meter-data/2026/05/23/meter_batch_20260523_130629.parquet/xl.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/data-lake/raw/meter-data/2026/05/23/meter_batch_20260523_130655.parquet/xl.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/lakehouse/minio_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/storage/lakehouse/minio_client.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +63,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Python.command_response_consumer (1).executor": "Debug",
+    "Python.command_response_consumer (1).executor": "Run",
     "Python.command_response_consumer.executor": "Run",
     "Python.raw_sensor_data.executor": "Run",
     "Python.raw_sensor_data_consumer (1).executor": "Run",
@@ -78,7 +79,7 @@
       <recent name="D:\testbed\ingestion\kafka_consumers" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.command_response_consumer (1)">
+  <component name="RunManager" selected="Python.raw_sensor_data_consumer (1)">
     <configuration name="command_response_consumer (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="testbed" />
       <option name="ENV_FILES" value="" />
@@ -213,8 +214,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.command_response_consumer (1)" />
         <item itemvalue="Python.raw_sensor_data_consumer (1)" />
+        <item itemvalue="Python.command_response_consumer (1)" />
         <item itemvalue="Python.test_minio" />
         <item itemvalue="Python.sense_db_connect" />
         <item itemvalue="Python.raw_sensor_data_consumer (1)" />

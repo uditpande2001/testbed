@@ -1,68 +1,32 @@
 from kafka import KafkaConsumer
-from minio import Minio
+
 import json
 import logging
-import pandas as pd
 
-from datetime import datetime
+from configs.kakfa_config import (
+KAFKA_BOOTSTRAP_SERVERS, AUTO_OFFSET_RESET )
 
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)s - %(module)s - %(lineno)d - %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-# setup minio datalake
-minio_client = Minio(
-    "localhost:9000",
-    access_key="admin",
-    secret_key="password123",
-    secure=False
+from configs.pipeline_config import (
+    BATCH_SIZE,
+    RAW_BUCKET
 )
 
-def upload_batch_to_lake(messages):
+from storage.lakehouse.parquet_writer import (
+    upload_batch_to_lake
+)
 
-    if not messages:
-        return
 
-    # Convert batch to DataFrame
-    df = pd.DataFrame(messages)
+logging.basicConfig(level=logging.INFO)
 
-    # Generate timestamp
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+logger = logging.getLogger()
 
-    file_name = f"meter_batch_{timestamp}.parquet"
 
-    # Save locally temporarily
-    df.to_parquet(file_name, index=False)
-
-    # Date partitions
-    today = datetime.now()
-
-    object_name = (
-        f"meter-data/"
-        f"{today.year}/"
-        f"{today.month:02}/"
-        f"{today.day:02}/"
-        f"{file_name}"
-    )
-
-    # Upload to MinIO raw bucket
-    minio_client.fput_object(
-        "raw",
-        object_name,
-        file_name
-    )
-
-    logger.info(f"Uploaded to lake: {object_name}")
-
-# setup kafka consumer
 def kafka_consumer():
 
     consumer = KafkaConsumer(
-        bootstrap_servers='216.48.180.61:9092',
-        auto_offset_reset='latest',
+        bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
+        auto_offset_reset=AUTO_OFFSET_RESET,
         value_deserializer=lambda m: json.loads(m.decode('utf-8'))
     )
 
@@ -70,24 +34,21 @@ def kafka_consumer():
 
     batch_messages = []
 
-    BATCH_SIZE = 100
-
     for message in consumer:
 
         data = message.value
 
-        # print(data)
-
         batch_messages.append(data)
 
-        # Upload batch when size reached
         if len(batch_messages) >= BATCH_SIZE:
 
-            print("uploading to datalake")
-            upload_batch_to_lake(batch_messages)
+            upload_batch_to_lake(
+                messages=batch_messages,
+                bucket_name=RAW_BUCKET,
+                dataset_name="meter-data"
+            )
 
             batch_messages.clear()
-
 
 
 if __name__ == '__main__':
