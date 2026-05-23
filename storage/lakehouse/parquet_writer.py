@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 from datetime import datetime
 
@@ -41,3 +42,6 @@ def upload_batch_to_lake(
     )
 
     print(f"Uploaded: {object_name}")
+
+    # delete temporarily stored files
+    os.remove(file_name)

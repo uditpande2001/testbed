@@ -15,4 +15,4 @@ services:
     command: server /data --console-address ":9001"
 
     volumes:
-      - ./storage/data-lake:/data
+      - ./storage/data_lake:/data
