@@ -16,3 +16,14 @@ services:
 
     volumes:
       - ./storage/data_lake:/data
+
+
+  graphdb:
+    image: ontotext/graphdb:11.3.0
+    container_name: graphdb
+
+    ports:
+      - "7200:7200"
+
+    volumes:
+      - ./storage/graphdb:/opt/graphdb/home

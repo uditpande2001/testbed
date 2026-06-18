@@ -19,6 +19,46 @@ def generate_dataset_rdf(dataset_metadata):
         EX + f"dataset/{dataset_metadata.dataset_name}"
     )
 
+    # topic_uri
+    topic_uri = URIRef(
+        EX + f"kafka-topic/{dataset_metadata.source_name}"
+    )
+
+    # consumer_uri
+    consumer_uri = URIRef(
+        EX + f"consumer/{dataset_metadata.consumer_name}"
+    )
+
+    graph.add((
+        topic_uri,
+        RDF.type,
+        EX.KafkaTopic
+    ))
+
+    # graph.add((
+    #     topic_uri,
+    #     EX.produces,
+    #     dataset_uri
+    # ))
+
+    graph.add((
+        topic_uri,
+        EX.consumedBy,
+        consumer_uri
+    ))
+
+    graph.add((
+        consumer_uri,
+        EX.creates,
+        dataset_uri
+    ))
+
+    graph.add((
+        consumer_uri,
+        RDF.type,
+        EX.Consumer
+    ))
+
     graph.add((
         dataset_uri,
         RDF.type,
@@ -92,6 +132,12 @@ if __name__ == '__main__':
 
         combined_graph += rdf_graph
 
-    print(
-        combined_graph.serialize(format="turtle")
+    # print(
+    #     combined_graph.serialize(format="turtle")
+    # )
+
+    combined_graph.serialize(
+        destination="metadata.ttl",
+        format="turtle"
     )
+    print("Metadata graph exported.")

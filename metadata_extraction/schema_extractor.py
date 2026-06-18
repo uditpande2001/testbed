@@ -11,6 +11,11 @@ from metadata_extraction.metadata_models import (
     ColumnMetadata
 )
 
+from configs.metadata_config import (
+    DATASET_SOURCE_MAPPING
+)
+from configs.consumer_config import (DATASET_CONSUMER_MAPPING)
+
 
 def extract_schema_metadata(parquet_path):
 
@@ -30,10 +35,29 @@ def extract_schema_metadata(parquet_path):
 
         columns.append(column_metadata)
 
+    # dataset_metadata = DatasetMetadata(
+    #     dataset_name=dataset_name,
+    #     parquet_path=parquet_path,
+    #     row_count=len(df),
+    #     columns=columns
+    # )
+
     dataset_metadata = DatasetMetadata(
         dataset_name=dataset_name,
         parquet_path=parquet_path,
         row_count=len(df),
+
+        source_type="KafkaTopic",
+
+        source_name=DATASET_SOURCE_MAPPING.get(
+            dataset_name,
+            "unknown"
+        ),
+        consumer_name=DATASET_CONSUMER_MAPPING.get(
+            dataset_name,
+            "UnknownConsumer"
+        ),
+
         columns=columns
     )
 

@@ -21,4 +21,10 @@ class DatasetMetadata:
 
     row_count: int
 
+    source_type: str
+
+    source_name: str
+
+    consumer_name: str
+
     columns: List[ColumnMetadata]

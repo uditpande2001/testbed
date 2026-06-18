@@ -1,0 +1,153 @@
+@prefix ns1: <http://metadata-platform.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://metadata-platform.com/kafka-topic/command-response> a ns1:KafkaTopic ;
+    ns1:consumedBy <http://metadata-platform.com/consumer/CommandResponseConsumer> .
+
+<http://metadata-platform.com/kafka-topic/raw-sensor-data> a ns1:KafkaTopic ;
+    ns1:consumedBy <http://metadata-platform.com/consumer/RawSensorConsumer> .
+
+<http://metadata-platform.com/consumer/CommandResponseConsumer> a ns1:Consumer ;
+    ns1:creates <http://metadata-platform.com/dataset/command-response> .
+
+<http://metadata-platform.com/consumer/RawSensorConsumer> a ns1:Consumer ;
+    ns1:creates <http://metadata-platform.com/dataset/meter-data> .
+
+<http://metadata-platform.com/dataset/command-response> a ns1:Dataset ;
+    ns1:hasColumn <http://metadata-platform.com/dataset/command-response/column/commandId>,
+        <http://metadata-platform.com/dataset/command-response/column/commandType>,
+        <http://metadata-platform.com/dataset/command-response/column/debugServerTime>,
+        <http://metadata-platform.com/dataset/command-response/column/nodeId>,
+        <http://metadata-platform.com/dataset/command-response/column/operationResults>,
+        <http://metadata-platform.com/dataset/command-response/column/status> ;
+    ns1:rowCount 1,
+        20 .
+
+<http://metadata-platform.com/dataset/command-response/column/commandId> a ns1:Column ;
+    ns1:dataType "int64" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/command-response/column/commandType> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/command-response/column/debugServerTime> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/command-response/column/nodeId> a ns1:Column ;
+    ns1:dataType "int64" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/command-response/column/operationResults> a ns1:Column ;
+    ns1:dataType "object" ;
+    ns1:nullCount 19 .
+
+<http://metadata-platform.com/dataset/command-response/column/status> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data> a ns1:Dataset ;
+    ns1:hasColumn <http://metadata-platform.com/dataset/meter-data/column/TOR>,
+        <http://metadata-platform.com/dataset/meter-data/column/attributeIds>,
+        <http://metadata-platform.com/dataset/meter-data/column/capturePeriod>,
+        <http://metadata-platform.com/dataset/meter-data/column/classIds>,
+        <http://metadata-platform.com/dataset/meter-data/column/data>,
+        <http://metadata-platform.com/dataset/meter-data/column/dataObis>,
+        <http://metadata-platform.com/dataset/meter-data/column/dataTypes>,
+        <http://metadata-platform.com/dataset/meter-data/column/debugServerTime>,
+        <http://metadata-platform.com/dataset/meter-data/column/last_ntp_sync_time>,
+        <http://metadata-platform.com/dataset/meter-data/column/meterNumber>,
+        <http://metadata-platform.com/dataset/meter-data/column/meter_category>,
+        <http://metadata-platform.com/dataset/meter-data/column/meter_manufacturer>,
+        <http://metadata-platform.com/dataset/meter-data/column/meter_type>,
+        <http://metadata-platform.com/dataset/meter-data/column/nodeId>,
+        <http://metadata-platform.com/dataset/meter-data/column/scalar>,
+        <http://metadata-platform.com/dataset/meter-data/column/scalarObis>,
+        <http://metadata-platform.com/dataset/meter-data/column/sensor_time>,
+        <http://metadata-platform.com/dataset/meter-data/column/subType>,
+        <http://metadata-platform.com/dataset/meter-data/column/type>,
+        <http://metadata-platform.com/dataset/meter-data/column/uuid> ;
+    ns1:rowCount 15,
+        20 .
+
+<http://metadata-platform.com/dataset/meter-data/column/TOR> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/attributeIds> a ns1:Column ;
+    ns1:dataType "object" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/capturePeriod> a ns1:Column ;
+    ns1:dataType "int64" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/classIds> a ns1:Column ;
+    ns1:dataType "object" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/data> a ns1:Column ;
+    ns1:dataType "object" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/dataObis> a ns1:Column ;
+    ns1:dataType "object" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/dataTypes> a ns1:Column ;
+    ns1:dataType "object" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/debugServerTime> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/last_ntp_sync_time> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/meterNumber> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/meter_category> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/meter_manufacturer> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/meter_type> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/nodeId> a ns1:Column ;
+    ns1:dataType "int64" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/scalar> a ns1:Column ;
+    ns1:dataType "object" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/scalarObis> a ns1:Column ;
+    ns1:dataType "object" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/sensor_time> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/subType> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/type> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/dataset/meter-data/column/uuid> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
