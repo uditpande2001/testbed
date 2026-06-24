@@ -21,6 +21,7 @@
         <http://metadata-platform.com/dataset/command-response/column/operationResults>,
         <http://metadata-platform.com/dataset/command-response/column/status> ;
     ns1:rowCount 1,
+        3,
         20 .
 
 <http://metadata-platform.com/dataset/command-response/column/commandId> a ns1:Column ;
@@ -41,7 +42,8 @@
 
 <http://metadata-platform.com/dataset/command-response/column/operationResults> a ns1:Column ;
     ns1:dataType "object" ;
-    ns1:nullCount 19 .
+    ns1:nullCount 18,
+        19 .
 
 <http://metadata-platform.com/dataset/command-response/column/status> a ns1:Column ;
     ns1:dataType "str" ;

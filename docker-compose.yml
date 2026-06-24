@@ -27,3 +27,4 @@ services:
 
     volumes:
       - ./storage/graphdb:/opt/graphdb/home
+
