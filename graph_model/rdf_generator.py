@@ -1,84 +1,258 @@
+from graph_model.upload_to_graphdb import upload_ttl
+
 from rdflib import Graph, RDF, Literal, URIRef
 
 from graph_model.namespaces import EX
 
-from metadata_extraction.schema_extractor import (
-    extract_schema_metadata
+from metadata_extraction.dataset_aggregator import (
+    aggregate_datasets
 )
 
-from metadata_extraction.dataset_discovery import (
-    list_parquet_objects
-)
 
-def generate_dataset_rdf(dataset_metadata):
+def generate_metadata_graph(dataset_metadata):
+    """
+    Generate an RDF metadata graph for a single logical dataset.
+
+    Ontology mapping:
+    - Kafka Topic            -> SourceBasedDataCollection
+    - Kafka Consumer         -> DataCollectionProcess
+    - Logical Dataset        -> DataRepresentation
+    - Business Dataset       -> EnterpriseData
+    - Extracted Metadata     -> MetadataCollection
+    - Metadata Category      -> MetadataType (DataDescription)
+    - MinIO                  -> StorageSystem
+    """
 
     graph = Graph()
 
-    # Dataset URI
-    dataset_uri = URIRef(
-        EX + f"dataset/{dataset_metadata.dataset_name}"
+    # ------------------------------------------------------------------
+    # URIs
+    # ------------------------------------------------------------------
+
+    enterprise_uri = URIRef(
+        EX + "enterprise/probus"
     )
 
-    # topic_uri
-    topic_uri = URIRef(
-        EX + f"kafka-topic/{dataset_metadata.source_name}"
+    enterprise_data_uri = URIRef(
+        EX + f"enterprise-data/{dataset_metadata.dataset_name}"
     )
 
-    # consumer_uri
-    consumer_uri = URIRef(
-        EX + f"consumer/{dataset_metadata.consumer_name}"
+    data_representation_uri = URIRef(
+        EX + f"data-representation/{dataset_metadata.dataset_name}"
     )
+
+    metadata_collection_uri = URIRef(
+        EX + f"metadata-collection/{dataset_metadata.dataset_name}"
+    )
+
+    source_collection_uri = URIRef(
+        EX + f"source-based-data-collection/{dataset_metadata.source_name}"
+    )
+
+    data_collection_process_uri = URIRef(
+        EX + f"data-collection-process/{dataset_metadata.consumer_name}"
+    )
+
+    storage_system_uri = URIRef(
+        EX + "storage-system/minio"
+    )
+
+    data_description_uri = URIRef(
+        EX + "metadata-type/data-description"
+    )
+
+    # ------------------------------------------------------------------
+    # Enterprise
+    # ------------------------------------------------------------------
 
     graph.add((
-        topic_uri,
+        enterprise_uri,
         RDF.type,
-        EX.KafkaTopic
-    ))
-
-    # graph.add((
-    #     topic_uri,
-    #     EX.produces,
-    #     dataset_uri
-    # ))
-
-    graph.add((
-        topic_uri,
-        EX.consumedBy,
-        consumer_uri
+        EX.Enterprise
     ))
 
     graph.add((
-        consumer_uri,
+        enterprise_uri,
+        EX.hasDataCollection,
+        source_collection_uri
+    ))
+
+    graph.add((
+        enterprise_uri,
+        EX.hasEnterpriseData,
+        enterprise_data_uri
+    ))
+
+    graph.add((
+        enterprise_uri,
+        EX.hasStorageSystem,
+        storage_system_uri
+    ))
+
+    # ------------------------------------------------------------------
+    # Enterprise Data
+    # ------------------------------------------------------------------
+
+    graph.add((
+        enterprise_data_uri,
+        RDF.type,
+        EX.EnterpriseData
+    ))
+
+    graph.add((
+        enterprise_data_uri,
+        EX.name,
+        Literal(dataset_metadata.dataset_name)
+    ))
+
+    graph.add((
+        enterprise_data_uri,
+        EX.hasRepresentation,
+        data_representation_uri
+    ))
+
+    graph.add((
+        enterprise_data_uri,
+        EX.hasMetadataCollection,
+        metadata_collection_uri
+    ))
+
+    # ------------------------------------------------------------------
+    # Source-Based Data Collection
+    # ------------------------------------------------------------------
+
+    graph.add((
+        source_collection_uri,
+        RDF.type,
+        EX.SourceBasedDataCollection
+    ))
+
+    graph.add((
+        source_collection_uri,
+        EX.executedBy,
+        data_collection_process_uri
+    ))
+
+    # ------------------------------------------------------------------
+    # Data Collection Process
+    # ------------------------------------------------------------------
+
+    graph.add((
+        data_collection_process_uri,
+        RDF.type,
+        EX.DataCollectionProcess
+    ))
+
+    graph.add((
+        data_collection_process_uri,
         EX.creates,
-        dataset_uri
+        data_representation_uri
     ))
 
+    # ------------------------------------------------------------------
+    # Data Representation
+    # ------------------------------------------------------------------
+
     graph.add((
-        consumer_uri,
+        data_representation_uri,
         RDF.type,
-        EX.Consumer
+        EX.DataRepresentation
     ))
 
     graph.add((
-        dataset_uri,
-        RDF.type,
-        EX.Dataset
-    ))
-
-    graph.add((
-        dataset_uri,
+        data_representation_uri,
         EX.rowCount,
         Literal(dataset_metadata.row_count)
     ))
 
-    # Columns
+    graph.add((
+        data_representation_uri,
+        EX.columnCount,
+        Literal(dataset_metadata.column_count)
+    ))
+
+    graph.add((
+        data_representation_uri,
+        EX.parquetPath,
+        Literal(dataset_metadata.parquet_path)
+    ))
+
+    graph.add((
+        data_representation_uri,
+        EX.sourceName,
+        Literal(dataset_metadata.source_name)
+    ))
+
+    graph.add((
+        data_representation_uri,
+        EX.consumerName,
+        Literal(dataset_metadata.consumer_name)
+    ))
+
+    # ------------------------------------------------------------------
+    # Storage System
+    # ------------------------------------------------------------------
+
+    graph.add((
+        storage_system_uri,
+        RDF.type,
+        EX.StorageSystem
+    ))
+
+    graph.add((
+        storage_system_uri,
+        EX.stores,
+        data_representation_uri
+    ))
+
+    # ------------------------------------------------------------------
+    # Metadata Collection
+    # ------------------------------------------------------------------
+
+    graph.add((
+        metadata_collection_uri,
+        RDF.type,
+        EX.MetadataCollection
+    ))
+
+    graph.add((
+        metadata_collection_uri,
+        EX.describes,
+        data_representation_uri
+    ))
+
+    graph.add((
+        metadata_collection_uri,
+        EX.hasMetadataType,
+        data_description_uri
+    ))
+
+    # ------------------------------------------------------------------
+    # Metadata Type
+    # ------------------------------------------------------------------
+
+    graph.add((
+        data_description_uri,
+        RDF.type,
+        EX.MetadataType
+    ))
+
+    graph.add((
+        data_description_uri,
+        EX.name,
+        Literal("Data Description")
+    ))
+
+    # ------------------------------------------------------------------
+    # Column Metadata
+    # ------------------------------------------------------------------
+
     for column in dataset_metadata.columns:
 
-
         column_uri = URIRef(
-            EX +
-            f"dataset/{dataset_metadata.dataset_name}/"
-            f"column/{column.column_name}"
+            EX
+            + f"data-representation/{dataset_metadata.dataset_name}/"
+            + f"column/{column.column_name}"
         )
 
         graph.add((
@@ -88,7 +262,7 @@ def generate_dataset_rdf(dataset_metadata):
         ))
 
         graph.add((
-            dataset_uri,
+            data_representation_uri,
             EX.hasColumn,
             column_uri
         ))
@@ -108,36 +282,20 @@ def generate_dataset_rdf(dataset_metadata):
     return graph
 
 
-
-
-
-if __name__ == '__main__':
-
-    parquet_files = list_parquet_objects("raw")
+if __name__ == "__main__":
 
     combined_graph = Graph()
 
-    for file in parquet_files:
-        parquet_path = f"s3://raw/{file}"
+    datasets = aggregate_datasets("raw")
 
-        # print(f"\nProcessing: {parquet_path}")
-
-        metadata = extract_schema_metadata(
-            parquet_path
-        )
-
-        rdf_graph = generate_dataset_rdf(
-            metadata
-        )
-
-        combined_graph += rdf_graph
-
-    # print(
-    #     combined_graph.serialize(format="turtle")
-    # )
+    for metadata in datasets:
+        combined_graph += generate_metadata_graph(metadata)
 
     combined_graph.serialize(
         destination="metadata.ttl",
         format="turtle"
     )
-    print("Metadata graph exported.")
+
+    upload_ttl()
+
+    print("Metadata graph exported and uploaded successfully.")

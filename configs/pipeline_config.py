@@ -5,3 +5,5 @@ RAW_BUCKET = "raw"
 PROCESSED_BUCKET = "processed"
 
 CURATED_BUCKET = "curated"
+
+RUN_DURATION_SECONDS = 30

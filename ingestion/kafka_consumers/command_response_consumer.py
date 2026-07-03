@@ -4,6 +4,8 @@ import json
 import logging
 import signal
 
+from datetime import datetime, timedelta
+
 from configs.kakfa_config import (
     KAFKA_BOOTSTRAP_SERVERS,
     AUTO_OFFSET_RESET
@@ -11,7 +13,8 @@ from configs.kakfa_config import (
 
 from configs.pipeline_config import (
     BATCH_SIZE,
-    RAW_BUCKET
+    RAW_BUCKET,
+    RUN_DURATION_SECONDS
 )
 
 from storage.lakehouse.parquet_writer import (
@@ -32,7 +35,7 @@ def handle_shutdown(signum, frame):
     shutdown_requested = True
 
 
-# Handle Ctrl+C and Docker stop
+# Register shutdown signals
 signal.signal(signal.SIGINT, handle_shutdown)
 signal.signal(signal.SIGTERM, handle_shutdown)
 
@@ -67,9 +70,17 @@ def kafka_consumer():
 
     logger.info("Command response consumer started")
 
+    # Consumer will run only for the configured duration
+    end_time = datetime.now() + timedelta(
+        seconds=RUN_DURATION_SECONDS
+    )
+
     try:
 
-        while not shutdown_requested:
+        while (
+            not shutdown_requested
+            and datetime.now() < end_time
+        ):
 
             message_pack = consumer.poll(timeout_ms=1000)
 
@@ -91,6 +102,8 @@ def kafka_consumer():
 
                         batch_messages.clear()
 
+        logger.info("Run duration reached. Stopping consumer...")
+
     except Exception as e:
         logger.exception(f"Consumer error: {e}")
 
@@ -98,8 +111,10 @@ def kafka_consumer():
 
         logger.info("Shutting down consumer")
 
+        # Flush any remaining messages
         flush_batch(batch_messages)
 
+        # Close Kafka consumer cleanly
         consumer.close()
 
         logger.info("Consumer closed successfully")

@@ -6,14 +6,14 @@
     "metadata-kg;;metadata.ttl" : {
       "name" : "metadata.ttl",
       "status" : "DONE",
-      "message" : "Imported successfully in less than a second.",
+      "message" : "Imported successfully in 2s.",
       "context" : "",
       "replaceGraphs" : [ ],
       "baseURI" : "file:/uploaded/generated/metadata.ttl",
       "forceSerial" : false,
       "type" : "file",
       "format" : null,
-      "data" : "6103052f-b82b-4237-859e-bd63f9fe2625",
+      "data" : "89c7a797-277b-4f6a-85ef-8843dad08c1f",
       "parserSettings" : {
         "preserveBNodeIds" : false,
         "failOnUnknownDataTypes" : false,
@@ -25,10 +25,10 @@
         "stopOnError" : true,
         "contextLink" : null
       },
-      "size" : "6452",
-      "lastModified" : 1780665076214,
-      "imported" : 1780665076175,
-      "addedStatements" : 118,
+      "size" : "8680",
+      "lastModified" : 1782334312130,
+      "imported" : 1782334314304,
+      "addedStatements" : 134,
       "removedStatements" : 0,
       "numReplacedGraphs" : 0
     }

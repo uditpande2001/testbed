@@ -35,17 +35,11 @@ def extract_schema_metadata(parquet_path):
 
         columns.append(column_metadata)
 
-    # dataset_metadata = DatasetMetadata(
-    #     dataset_name=dataset_name,
-    #     parquet_path=parquet_path,
-    #     row_count=len(df),
-    #     columns=columns
-    # )
-
     dataset_metadata = DatasetMetadata(
         dataset_name=dataset_name,
         parquet_path=parquet_path,
         row_count=len(df),
+        column_count=len(df.columns),
 
         source_type="KafkaTopic",
 
