@@ -1,7 +1,7 @@
 import os
-import pandas as pd
-
 from datetime import datetime
+
+import pandas as pd
 
 from storage.lakehouse.minio_client import client
 
@@ -13,10 +13,31 @@ from lineage.openlineage_emitter import (
 
 
 def upload_batch_to_lake(
-        messages,
-        bucket_name,
-        dataset_name
+    messages,
+    bucket_name,
+    dataset_name,
+    source_name,
 ):
+    """
+    Upload a batch of Kafka messages to MinIO and emit
+    OpenLineage events.
+
+    Parameters
+    ----------
+    messages : list
+        Batch of Kafka messages.
+
+    bucket_name : str
+        MinIO bucket name.
+
+    dataset_name : str
+        Logical dataset name
+        (e.g. meter-data, command-response).
+
+    source_name : str
+        Source system name
+        (Kafka topic).
+    """
 
     if not messages:
         return
@@ -27,7 +48,10 @@ def upload_batch_to_lake(
 
     file_name = f"{dataset_name}_{timestamp}.parquet"
 
-    df.to_parquet(file_name, index=False)
+    df.to_parquet(
+        file_name,
+        index=False
+    )
 
     today = datetime.now()
 
@@ -39,38 +63,48 @@ def upload_batch_to_lake(
         f"{file_name}"
     )
 
-    output_dataset = f"s3://{bucket_name}/{object_name}"
+    object_path = f"s3://{bucket_name}/{object_name}"
+
+    # ----------------------------------------------------------
+    # OpenLineage START
+    # ----------------------------------------------------------
 
     run_id = start_run(
         job_name=f"{dataset_name}-pipeline",
-        input_dataset=dataset_name,
-        output_dataset=output_dataset,
+        input_namespace="kafka",
+        input_dataset=source_name,
+        output_namespace="minio",
+        output_dataset=dataset_name,
     )
 
     try:
 
         client.fput_object(
-            bucket_name,
-            object_name,
-            file_name
+            bucket_name=bucket_name,
+            object_name=object_name,
+            file_path=file_name,
         )
 
         complete_run(
             run_id=run_id,
             job_name=f"{dataset_name}-pipeline",
-            input_dataset=dataset_name,
-            output_dataset=output_dataset,
+            input_namespace="kafka",
+            input_dataset=source_name,
+            output_namespace="minio",
+            output_dataset=dataset_name,
         )
 
-        print(f"Uploaded: {output_dataset}")
+        print(f"Uploaded: {object_path}")
 
     except Exception:
 
         fail_run(
             run_id=run_id,
             job_name=f"{dataset_name}-pipeline",
-            input_dataset=dataset_name,
-            output_dataset=output_dataset,
+            input_namespace="kafka",
+            input_dataset=source_name,
+            output_namespace="minio",
+            output_dataset=dataset_name,
         )
 
         raise

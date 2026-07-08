@@ -35,7 +35,6 @@ def handle_shutdown(signum, frame):
     shutdown_requested = True
 
 
-# Register shutdown signals
 signal.signal(signal.SIGINT, handle_shutdown)
 signal.signal(signal.SIGTERM, handle_shutdown)
 
@@ -50,7 +49,8 @@ def flush_batch(batch_messages):
     upload_batch_to_lake(
         messages=batch_messages,
         bucket_name=RAW_BUCKET,
-        dataset_name="command-response"
+        dataset_name="command-response",
+        source_name="command-response",
     )
 
     batch_messages.clear()
@@ -59,18 +59,17 @@ def flush_batch(batch_messages):
 def kafka_consumer():
 
     consumer = KafkaConsumer(
-        'command-response',
+        "command-response",
         bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
         auto_offset_reset=AUTO_OFFSET_RESET,
-        value_deserializer=lambda m: json.loads(m.decode('utf-8')),
-        enable_auto_commit=True
+        value_deserializer=lambda m: json.loads(m.decode("utf-8")),
+        enable_auto_commit=True,
     )
 
     batch_messages = []
 
     logger.info("Command response consumer started")
 
-    # Consumer will run only for the configured duration
     end_time = datetime.now() + timedelta(
         seconds=RUN_DURATION_SECONDS
     )
@@ -84,20 +83,19 @@ def kafka_consumer():
 
             message_pack = consumer.poll(timeout_ms=1000)
 
-            for topic_partition, messages in message_pack.items():
+            for _, messages in message_pack.items():
 
                 for message in messages:
 
-                    data = message.value
-
-                    batch_messages.append(data)
+                    batch_messages.append(message.value)
 
                     if len(batch_messages) >= BATCH_SIZE:
 
                         upload_batch_to_lake(
                             messages=batch_messages,
                             bucket_name=RAW_BUCKET,
-                            dataset_name="command-response"
+                            dataset_name="command-response",
+                            source_name="command-response",
                         )
 
                         batch_messages.clear()
@@ -105,20 +103,19 @@ def kafka_consumer():
         logger.info("Run duration reached. Stopping consumer...")
 
     except Exception as e:
+
         logger.exception(f"Consumer error: {e}")
 
     finally:
 
         logger.info("Shutting down consumer")
 
-        # Flush any remaining messages
         flush_batch(batch_messages)
 
-        # Close Kafka consumer cleanly
         consumer.close()
 
         logger.info("Consumer closed successfully")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     kafka_consumer()

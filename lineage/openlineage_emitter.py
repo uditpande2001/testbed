@@ -29,11 +29,13 @@ def _emit_event(
     event_type: RunState,
     run_id: str,
     job_name: str,
+    input_namespace: str,
     input_dataset: str,
+    output_namespace: str,
     output_dataset: str,
 ):
     """
-    Emits a single OpenLineage event.
+    Emit a single OpenLineage event.
     """
 
     event = RunEvent(
@@ -46,13 +48,13 @@ def _emit_event(
         ),
         inputs=[
             Dataset(
-                namespace="kafka",
+                namespace=input_namespace,
                 name=input_dataset,
             )
         ],
         outputs=[
             Dataset(
-                namespace="minio",
+                namespace=output_namespace,
                 name=output_dataset,
             )
         ],
@@ -68,15 +70,11 @@ def _emit_event(
 
 def start_run(
     job_name: str,
+    input_namespace: str,
     input_dataset: str,
+    output_namespace: str,
     output_dataset: str,
 ) -> str:
-    """
-    Emits a START event.
-
-    Returns the run_id that should be reused when
-    emitting COMPLETE or FAIL.
-    """
 
     run_id = str(uuid.uuid4())
 
@@ -84,7 +82,9 @@ def start_run(
         event_type=RunState.START,
         run_id=run_id,
         job_name=job_name,
+        input_namespace=input_namespace,
         input_dataset=input_dataset,
+        output_namespace=output_namespace,
         output_dataset=output_dataset,
     )
 
@@ -94,18 +94,19 @@ def start_run(
 def complete_run(
     run_id: str,
     job_name: str,
+    input_namespace: str,
     input_dataset: str,
+    output_namespace: str,
     output_dataset: str,
 ):
-    """
-    Emits a COMPLETE event.
-    """
 
     _emit_event(
         event_type=RunState.COMPLETE,
         run_id=run_id,
         job_name=job_name,
+        input_namespace=input_namespace,
         input_dataset=input_dataset,
+        output_namespace=output_namespace,
         output_dataset=output_dataset,
     )
 
@@ -113,17 +114,18 @@ def complete_run(
 def fail_run(
     run_id: str,
     job_name: str,
+    input_namespace: str,
     input_dataset: str,
+    output_namespace: str,
     output_dataset: str,
 ):
-    """
-    Emits a FAIL event.
-    """
 
     _emit_event(
         event_type=RunState.FAIL,
         run_id=run_id,
         job_name=job_name,
+        input_namespace=input_namespace,
         input_dataset=input_dataset,
+        output_namespace=output_namespace,
         output_dataset=output_dataset,
     )

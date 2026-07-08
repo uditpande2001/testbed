@@ -1,0 +1,66 @@
+@prefix ns1: <http://metadata-platform.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://metadata-platform.com/enterprise/probus> a ns1:Enterprise ;
+    ns1:hasDataCollection <http://metadata-platform.com/source-based-data-collection/command-response> ;
+    ns1:hasEnterpriseData <http://metadata-platform.com/enterprise-data/command-response> ;
+    ns1:hasStorageSystem <http://metadata-platform.com/storage-system/minio> .
+
+<http://metadata-platform.com/data-collection-process/CommandResponseConsumer> a ns1:DataCollectionProcess ;
+    ns1:creates <http://metadata-platform.com/data-representation/command-response> .
+
+<http://metadata-platform.com/data-representation/command-response/column/commandId> a ns1:Column ;
+    ns1:dataType "int64" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/data-representation/command-response/column/commandType> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/data-representation/command-response/column/debugServerTime> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/data-representation/command-response/column/nodeId> a ns1:Column ;
+    ns1:dataType "int64" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/data-representation/command-response/column/operationResults> a ns1:Column ;
+    ns1:dataType "object" ;
+    ns1:nullCount 284 .
+
+<http://metadata-platform.com/data-representation/command-response/column/status> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:nullCount 0 .
+
+<http://metadata-platform.com/enterprise-data/command-response> a ns1:EnterpriseData ;
+    ns1:hasMetadataCollection <http://metadata-platform.com/metadata-collection/command-response> ;
+    ns1:hasRepresentation <http://metadata-platform.com/data-representation/command-response> ;
+    ns1:name "command-response" .
+
+<http://metadata-platform.com/metadata-collection/command-response> a ns1:MetadataCollection ;
+    ns1:describes <http://metadata-platform.com/data-representation/command-response> ;
+    ns1:hasMetadataType <http://metadata-platform.com/metadata-type/data-description> .
+
+<http://metadata-platform.com/metadata-type/data-description> a ns1:MetadataType ;
+    ns1:name "Data Description" .
+
+<http://metadata-platform.com/source-based-data-collection/command-response> a ns1:SourceBasedDataCollection ;
+    ns1:executedBy <http://metadata-platform.com/data-collection-process/CommandResponseConsumer> .
+
+<http://metadata-platform.com/storage-system/minio> a ns1:StorageSystem ;
+    ns1:stores <http://metadata-platform.com/data-representation/command-response> .
+
+<http://metadata-platform.com/data-representation/command-response> a ns1:DataRepresentation ;
+    ns1:columnCount 6 ;
+    ns1:consumerName "CommandResponseConsumer" ;
+    ns1:hasColumn <http://metadata-platform.com/data-representation/command-response/column/commandId>,
+        <http://metadata-platform.com/data-representation/command-response/column/commandType>,
+        <http://metadata-platform.com/data-representation/command-response/column/debugServerTime>,
+        <http://metadata-platform.com/data-representation/command-response/column/nodeId>,
+        <http://metadata-platform.com/data-representation/command-response/column/operationResults>,
+        <http://metadata-platform.com/data-representation/command-response/column/status> ;
+    ns1:parquetPath "s3://raw/command-response/2026/06/05/command-response_20260605_135030.parquet" ;
+    ns1:rowCount 1482 ;
+    ns1:sourceName "command-response" .
+

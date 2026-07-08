@@ -5,23 +5,14 @@ GRAPHDB_URL = (
     "metadata-kg/statements"
 )
 
-TTL_FILE = "metadata.ttl"
 
+def upload_ttl(ttl_file):
+    """
+    Upload a Turtle file to GraphDB.
+    """
 
-def upload_ttl():
-    # Clear existing data
-    response = requests.delete(GRAPHDB_URL)
+    with open(ttl_file, "rb") as f:
 
-    if response.status_code in (200, 204):
-        print("Existing metadata cleared.")
-    else:
-        print(
-            f"Warning: could not clear repository "
-            f"({response.status_code})"
-        )
-
-    # Upload new metadata
-    with open(TTL_FILE, "rb") as f:
         response = requests.post(
             GRAPHDB_URL,
             headers={
@@ -31,13 +22,20 @@ def upload_ttl():
         )
 
     if response.status_code in (200, 201, 204):
-        print("Metadata uploaded successfully.")
+
+        print(f"Uploaded: {ttl_file}")
+
     else:
+
         print(
-            f"Upload failed: {response.status_code}"
+            f"Upload failed ({response.status_code})"
         )
+
         print(response.text)
 
 
 if __name__ == "__main__":
-    upload_ttl()
+
+    upload_ttl(
+        "metadata/meter-data.ttl"
+    )

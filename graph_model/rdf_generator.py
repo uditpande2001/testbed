@@ -1,12 +1,8 @@
-from graph_model.upload_to_graphdb import upload_ttl
 
 from rdflib import Graph, RDF, Literal, URIRef
 
 from graph_model.namespaces import EX
 
-from metadata_extraction.dataset_aggregator import (
-    aggregate_datasets
-)
 
 
 def generate_metadata_graph(dataset_metadata):
@@ -282,20 +278,3 @@ def generate_metadata_graph(dataset_metadata):
     return graph
 
 
-if __name__ == "__main__":
-
-    combined_graph = Graph()
-
-    datasets = aggregate_datasets("raw")
-
-    for metadata in datasets:
-        combined_graph += generate_metadata_graph(metadata)
-
-    combined_graph.serialize(
-        destination="metadata.ttl",
-        format="turtle"
-    )
-
-    upload_ttl()
-
-    print("Metadata graph exported and uploaded successfully.")
