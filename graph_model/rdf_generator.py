@@ -1,22 +1,20 @@
-
 from rdflib import Graph, RDF, Literal, URIRef
 
 from graph_model.namespaces import EX
 
 
-
 def generate_metadata_graph(dataset_metadata):
     """
-    Generate an RDF metadata graph for a single logical dataset.
+    Generate an RDF metadata graph for a dataset.
 
-    Ontology mapping:
-    - Kafka Topic            -> SourceBasedDataCollection
-    - Kafka Consumer         -> DataCollectionProcess
-    - Logical Dataset        -> DataRepresentation
-    - Business Dataset       -> EnterpriseData
-    - Extracted Metadata     -> MetadataCollection
-    - Metadata Category      -> MetadataType (DataDescription)
-    - MinIO                  -> StorageSystem
+    Ontology mapping
+
+    Business Dataset      -> EnterpriseData
+    Parquet Dataset       -> DataRepresentation
+    Extracted Metadata    -> MetadataCollection
+    Metadata Category     -> MetadataType
+    MinIO                 -> StorageSystem
+    Columns               -> Column
     """
 
     graph = Graph()
@@ -34,19 +32,11 @@ def generate_metadata_graph(dataset_metadata):
     )
 
     data_representation_uri = URIRef(
-        EX + f"data-representation/{dataset_metadata.dataset_name}"
+        EX + f"data-representation/minio/{dataset_metadata.dataset_name}"
     )
 
     metadata_collection_uri = URIRef(
         EX + f"metadata-collection/{dataset_metadata.dataset_name}"
-    )
-
-    source_collection_uri = URIRef(
-        EX + f"source-based-data-collection/{dataset_metadata.source_name}"
-    )
-
-    data_collection_process_uri = URIRef(
-        EX + f"data-collection-process/{dataset_metadata.consumer_name}"
     )
 
     storage_system_uri = URIRef(
@@ -65,12 +55,6 @@ def generate_metadata_graph(dataset_metadata):
         enterprise_uri,
         RDF.type,
         EX.Enterprise
-    ))
-
-    graph.add((
-        enterprise_uri,
-        EX.hasDataCollection,
-        source_collection_uri
     ))
 
     graph.add((
@@ -114,38 +98,6 @@ def generate_metadata_graph(dataset_metadata):
     ))
 
     # ------------------------------------------------------------------
-    # Source-Based Data Collection
-    # ------------------------------------------------------------------
-
-    graph.add((
-        source_collection_uri,
-        RDF.type,
-        EX.SourceBasedDataCollection
-    ))
-
-    graph.add((
-        source_collection_uri,
-        EX.executedBy,
-        data_collection_process_uri
-    ))
-
-    # ------------------------------------------------------------------
-    # Data Collection Process
-    # ------------------------------------------------------------------
-
-    graph.add((
-        data_collection_process_uri,
-        RDF.type,
-        EX.DataCollectionProcess
-    ))
-
-    graph.add((
-        data_collection_process_uri,
-        EX.creates,
-        data_representation_uri
-    ))
-
-    # ------------------------------------------------------------------
     # Data Representation
     # ------------------------------------------------------------------
 
@@ -171,18 +123,6 @@ def generate_metadata_graph(dataset_metadata):
         data_representation_uri,
         EX.parquetPath,
         Literal(dataset_metadata.parquet_path)
-    ))
-
-    graph.add((
-        data_representation_uri,
-        EX.sourceName,
-        Literal(dataset_metadata.source_name)
-    ))
-
-    graph.add((
-        data_representation_uri,
-        EX.consumerName,
-        Literal(dataset_metadata.consumer_name)
     ))
 
     # ------------------------------------------------------------------
@@ -247,7 +187,7 @@ def generate_metadata_graph(dataset_metadata):
 
         column_uri = URIRef(
             EX
-            + f"data-representation/{dataset_metadata.dataset_name}/"
+            + f"data-representation/minio/{dataset_metadata.dataset_name}/"
             + f"column/{column.column_name}"
         )
 
@@ -276,5 +216,3 @@ def generate_metadata_graph(dataset_metadata):
         ))
 
     return graph
-
-

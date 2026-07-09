@@ -1,0 +1,30 @@
+@prefix ns1: <http://metadata-platform.com/> .
+
+<http://metadata-platform.com/data-collection-process/command-response-pipeline> a ns1:DataCollectionProcess ;
+    ns1:consumes <http://metadata-platform.com/data-representation/kafka/command-response> ;
+    ns1:creates <http://metadata-platform.com/data-representation/minio/command-response> .
+
+<http://metadata-platform.com/data-collection-process/knowledge-graph-loading> a ns1:DataCollectionProcess ;
+    ns1:consumes <http://metadata-platform.com/data-representation/rdf/metadata/meter-data.ttl> ;
+    ns1:creates <http://metadata-platform.com/data-representation/graphdb/metadata-kg> .
+
+<http://metadata-platform.com/data-collection-process/metadata-processing> a ns1:DataCollectionProcess ;
+    ns1:consumes <http://metadata-platform.com/data-representation/minio/meter-data> ;
+    ns1:creates <http://metadata-platform.com/data-representation/rdf/metadata/meter-data.ttl> .
+
+<http://metadata-platform.com/data-collection-process/meter-data-pipeline> a ns1:DataCollectionProcess ;
+    ns1:consumes <http://metadata-platform.com/data-representation/kafka/raw-sensor-data> ;
+    ns1:creates <http://metadata-platform.com/data-representation/minio/meter-data> .
+
+<http://metadata-platform.com/data-representation/graphdb/metadata-kg> a ns1:DataRepresentation .
+
+<http://metadata-platform.com/data-representation/kafka/command-response> a ns1:DataRepresentation .
+
+<http://metadata-platform.com/data-representation/kafka/raw-sensor-data> a ns1:DataRepresentation .
+
+<http://metadata-platform.com/data-representation/minio/command-response> a ns1:DataRepresentation .
+
+<http://metadata-platform.com/data-representation/minio/meter-data> a ns1:DataRepresentation .
+
+<http://metadata-platform.com/data-representation/rdf/metadata/meter-data.ttl> a ns1:DataRepresentation .
+

@@ -1,17 +1,20 @@
 import requests
+from pathlib import Path
 
 GRAPHDB_URL = (
     "http://localhost:7200/repositories/"
     "metadata-kg/statements"
 )
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 def upload_ttl(ttl_file):
     """
     Upload a Turtle file to GraphDB.
     """
 
-    with open(ttl_file, "rb") as f:
+
+    with open(BASE_DIR / ttl_file, "rb") as f:
 
         response = requests.post(
             GRAPHDB_URL,
@@ -36,6 +39,11 @@ def upload_ttl(ttl_file):
 
 if __name__ == "__main__":
 
-    upload_ttl(
-        "metadata/meter-data.ttl"
-    )
+    ttl_files = [
+        "metadata/meter-data.ttl",
+        "metadata/command-response.ttl",
+        "metadata/lineage.ttl"
+    ]
+
+    for ttl_file in ttl_files:
+        upload_ttl(ttl_file)
