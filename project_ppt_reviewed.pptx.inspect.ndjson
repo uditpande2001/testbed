@@ -1,0 +1,158 @@
+{"kind":"deck","id":"pr/6noio2","name":"Deck"}
+{"kind":"layout","layoutId":"62c29763-9fd7-4bab-9e0b-2b714885adb8","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"779a3fe8-367d-4645-87c4-41ca41d9e5ae","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/9kl133","slide":1,"title":"Slide 1","textShapes":0}
+{"kind":"image","id":"im/0zal4zmp","slide":1,"name":"","alt":"Smart meter and metadata knowledge graph title visual","bbox":[0,0,1280,720]}
+{"kind":"notes","id":"nt/9kl133","slide":1,"text":""}
+{"kind":"slide","id":"sl/flzng8","slide":2,"title":"WHY METADATA LINEAGE MATTERS","textShapes":9}
+{"kind":"shape","id":"sh/t8rqhkfe","slide":2,"bbox":[80,56,1040,3]}
+{"kind":"shape","id":"sh/65g7mpg3","slide":2,"bbox":[80,642,1040,2]}
+{"kind":"textbox","id":"sh/7698fux8","slide":2,"text":"WHY METADATA LINEAGE MATTERS","textPreview":"WHY METADATA LINEAGE MATTERS","textChars":28,"textLines":1,"bbox":[80,86,960,58]}
+{"kind":"textbox","id":"sh/gbipszy5","slide":2,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[1128,630,48,28]}
+{"kind":"textbox","id":"sh/hcrql4fq","slide":2,"text":"Enterprise data lakes can store large volumes of data, but the context around those datasets is scattered.","textPreview":"Enterprise data lakes can store large volumes of data, but the context around those datasets is scattered.","textChars":106,"textLines":1,"bbox":[90,162,980,70]}
+{"kind":"shape","id":"sh/u907qpgz","slide":2,"bbox":[90,270,310,190]}
+{"kind":"textbox","id":"sh/va98juxk","slide":2,"text":"Fragmented metadata","textPreview":"Fragmented metadata","textChars":19,"textLines":1,"bbox":[108,286,274,34]}
+{"kind":"textbox","id":"sh/wfypgvyl","slide":2,"text":"Schemas, storage paths, topics, and pipeline context are hard to inspect in one place.","textPreview":"Schemas, storage paths, topics, and pipeline context are hard to inspect in one place.","textChars":86,"textLines":1,"bbox":[108,326,274,118]}
+{"kind":"shape","id":"sh/xg7q90f6","slide":2,"bbox":[455,270,330,190]}
+{"kind":"textbox","id":"sh/5oju9ojq","slide":2,"text":"Relationship complexity","textPreview":"Relationship complexity","textChars":23,"textLines":1,"bbox":[473,286,294,34]}
+{"kind":"textbox","id":"sh/4nad0j25","slide":2,"text":"Traditional tables are awkward for dynamic relationships between datasets, processes, runs, and columns.","textPreview":"Traditional tables are awkward for dynamic relationships between datasets, processes, runs, and columns.","textChars":104,"textLines":1,"bbox":[473,326,294,118]}
+{"kind":"shape","id":"sh/jm1c7e1k","slide":2,"bbox":[840,270,330,190]}
+{"kind":"textbox","id":"sh/il8vy9kf","slide":2,"text":"Lineage blindspot","textPreview":"Lineage blindspot","textChars":17,"textLines":1,"bbox":[858,286,294,34]}
+{"kind":"textbox","id":"sh/tcjudoj2","slide":2,"text":"Without run-level evidence, it is difficult to prove when a schema changed and which run caused it.","textPreview":"Without run-level evidence, it is difficult to prove when a schema changed and which run caused it.","textChars":99,"textLines":1,"bbox":[858,326,294,118]}
+{"kind":"notes","id":"nt/flzng8","slide":2,"text":""}
+{"kind":"slide","id":"sl/kdgegq","slide":3,"title":"THE TESTBED TURNS PIPELINE ACTIVITY INTO A QUERYABLE GRAPH","textShapes":10}
+{"kind":"shape","id":"sh/bqh0z218","slide":3,"bbox":[80,56,1040,3]}
+{"kind":"shape","id":"sh/crq1s72t","slide":3,"bbox":[80,642,1040,2]}
+{"kind":"textbox","id":"sh/xsz21cje","slide":3,"text":"THE TESTBED TURNS PIPELINE ACTIVITY INTO A QUERYABLE GRAPH","textPreview":"THE TESTBED TURNS PIPELINE ACTIVITY INTO A QUERYABLE GRAPH","textChars":58,"textLines":1,"bbox":[80,86,960,58]}
+{"kind":"textbox","id":"sh/2lojmdkr","slide":3,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[1128,630,48,28]}
+{"kind":"textbox","id":"sh/nmh0vi1c","slide":3,"text":"Project objective","textPreview":"Project objective","textChars":17,"textLines":1,"bbox":[90,164,360,40]}
+{"kind":"textbox","id":"sh/onq1on2h","slide":3,"text":"Automatically extract dataset schemas from lakehouse files, model them as RDF knowledge graph entities, and use OpenLineage/Marquez to trace runs and schema changes.","textPreview":"Automatically extract dataset schemas from lakehouse files, model them as RDF knowledge graph entities, and use OpenLineage/Marquez to tr...","textChars":165,"textLines":1,"bbox":[90,214,1040,98]}
+{"kind":"shape","id":"sh/pozixsj2","slide":3,"bbox":[90,360,320,160]}
+{"kind":"textbox","id":"sh/ehojidkf","slide":3,"text":"Metadata extraction","textPreview":"Metadata extraction","textChars":19,"textLines":1,"bbox":[108,376,284,34]}
+{"kind":"textbox","id":"sh/fix0ri10","slide":3,"text":"Read Parquet files from MinIO and extract columns, data types, row counts, and null counts.","textPreview":"Read Parquet files from MinIO and extract columns, data types, row counts, and null counts.","textChars":91,"textLines":1,"bbox":[108,416,284,88]}
+{"kind":"shape","id":"sh/7m14byhg","slide":3,"bbox":[480,360,320,160]}
+{"kind":"textbox","id":"sh/mls32tgv","slide":3,"text":"Knowledge graph","textPreview":"Knowledge graph","textChars":15,"textLines":1,"bbox":[498,376,284,34]}
+{"kind":"textbox","id":"sh/9o3md8z6","slide":3,"text":"Map datasets, columns, storage systems, and metadata collections into RDF and load them into GraphDB.","textPreview":"Map datasets, columns, storage systems, and metadata collections into RDF and load them into GraphDB.","textChars":101,"textLines":1,"bbox":[498,416,284,88]}
+{"kind":"shape","id":"sh/8nul43yl","slide":3,"bbox":[870,360,320,160]}
+{"kind":"textbox","id":"sh/vql4fihc","slide":3,"text":"Lineage evidence","textPreview":"Lineage evidence","textChars":16,"textLines":1,"bbox":[888,376,284,34]}
+{"kind":"textbox","id":"sh/upc36dgr","slide":3,"text":"Capture OpenLineage events in Marquez and export compact SchemaChange nodes into GraphDB.","textPreview":"Capture OpenLineage events in Marquez and export compact SchemaChange nodes into GraphDB.","textChars":89,"textLines":1,"bbox":[888,416,284,88]}
+{"kind":"notes","id":"nt/kdgegq","slide":3,"text":""}
+{"kind":"slide","id":"sl/38tkiw","slide":4,"title":"END-TO-END ARCHITECTURE","textShapes":2}
+{"kind":"shape","id":"sh/w7qp0vu1","slide":4,"bbox":[80,56,1040,3]}
+{"kind":"shape","id":"sh/v6ho7qtg","slide":4,"bbox":[80,642,1040,2]}
+{"kind":"textbox","id":"sh/a5o7ylcb","slide":4,"text":"END-TO-END ARCHITECTURE","textPreview":"END-TO-END ARCHITECTURE","textChars":23,"textLines":1,"bbox":[80,86,960,58]}
+{"kind":"textbox","id":"sh/94f65gbq","slide":4,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[1128,630,48,28]}
+{"kind":"image","id":"im/5wvahcr2","slide":4,"name":"","alt":"Metadata knowledge graph architecture diagram","bbox":[58,124,1164,480]}
+{"kind":"notes","id":"nt/38tkiw","slide":4,"text":""}
+{"kind":"slide","id":"sl/fuswc3","slide":5,"title":"METADATA PROCESSING CREATES THE DATASET VIEW","textShapes":12}
+{"kind":"shape","id":"sh/5k3ihcba","slide":5,"bbox":[80,56,1040,3]}
+{"kind":"shape","id":"sh/ixcjmxcj","slide":5,"bbox":[80,642,1040,2]}
+{"kind":"textbox","id":"sh/jyl0f2t4","slide":5,"text":"METADATA PROCESSING CREATES THE DATASET VIEW","textPreview":"METADATA PROCESSING CREATES THE DATASET VIEW","textChars":44,"textLines":1,"bbox":[80,86,960,58]}
+{"kind":"textbox","id":"sh/sne1s7ul","slide":5,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[1128,630,48,28]}
+{"kind":"shape","id":"sh/tonilcb6","slide":5,"bbox":[100,178,300,168]}
+{"kind":"textbox","id":"sh/6lcjqxcv","slide":5,"text":"1. Discover datasets","textPreview":"1. Discover datasets","textChars":20,"textLines":1,"bbox":[118,194,264,34]}
+{"kind":"textbox","id":"sh/rml0j2tg","slide":5,"text":"List Parquet objects in MinIO for meter-data and command-response.","textPreview":"List Parquet objects in MinIO for meter-data and command-response.","textChars":66,"textLines":1,"bbox":[118,234,264,96]}
+{"kind":"shape","id":"sh/8rahgnuh","slide":5,"bbox":[490,178,300,168]}
+{"kind":"textbox","id":"sh/9sji9sv2","slide":5,"text":"2. Extract schema","textPreview":"2. Extract schema","textChars":17,"textLines":1,"bbox":[508,194,264,34]}
+{"kind":"textbox","id":"sh/twbm9gna","slide":5,"text":"Read columns, data types, row counts, null counts, and storage paths.","textPreview":"Read columns, data types, row counts, null counts, and storage paths.","textChars":69,"textLines":1,"bbox":[508,234,264,96]}
+{"kind":"shape","id":"sh/svi5gbm5","slide":5,"bbox":[880,178,300,168]}
+{"kind":"textbox","id":"sh/7u94765k","slide":5,"text":"3. Generate RDF","textPreview":"3. Generate RDF","textChars":15,"textLines":1,"bbox":[898,194,264,34]}
+{"kind":"textbox","id":"sh/6t0ne14z","slide":5,"text":"Create RDF triples using the ontology and serialize dataset TTL files.","textPreview":"Create RDF triples using the ontology and serialize dataset TTL files.","textChars":70,"textLines":1,"bbox":[898,234,264,96]}
+{"kind":"shape","id":"sh/hkb6dg3m","slide":5,"bbox":[295,406,300,168]}
+{"kind":"textbox","id":"sh/gj25kbm1","slide":5,"text":"4. Load GraphDB","textPreview":"4. Load GraphDB","textChars":15,"textLines":1,"bbox":[313,422,264,34]}
+{"kind":"textbox","id":"sh/fytobqlg","slide":5,"text":"Clear stale triples and reload the current metadata and lineage graph.","textPreview":"Clear stale triples and reload the current metadata and lineage graph.","textChars":70,"textLines":1,"bbox":[313,462,264,96]}
+{"kind":"shape","id":"sh/uxknil4v","slide":5,"bbox":[685,406,300,168]}
+{"kind":"textbox","id":"sh/pov6h03i","slide":5,"text":"5. Query columns","textPreview":"5. Query columns","textChars":16,"textLines":1,"bbox":[703,422,264,34]}
+{"kind":"textbox","id":"sh/4nm5ovmx","slide":5,"text":"Use SPARQL to inspect datasets, columns, data types, and lineage changes.","textPreview":"Use SPARQL to inspect datasets, columns, data types, and lineage changes.","textChars":73,"textLines":1,"bbox":[703,462,264,96]}
+{"kind":"notes","id":"nt/fuswc3","slide":5,"text":""}
+{"kind":"slide","id":"sl/3rrguo","slide":6,"title":"LINEAGE TRACKING RECORDS THE RUN THAT CHANGED A SCHEMA","textShapes":5}
+{"kind":"shape","id":"sh/kfelcjed","slide":6,"bbox":[80,56,1040,3]}
+{"kind":"shape","id":"sh/zu5k3exs","slide":6,"bbox":[80,642,1040,2]}
+{"kind":"textbox","id":"sh/ytw3a9w7","slide":6,"text":"LINEAGE TRACKING RECORDS THE RUN THAT CHANGED A SCHEMA","textPreview":"LINEAGE TRACKING RECORDS THE RUN THAT CHANGED A SCHEMA","textChars":54,"textLines":1,"bbox":[80,86,960,58]}
+{"kind":"textbox","id":"sh/tk7m9ofu","slide":6,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[1128,630,48,28]}
+{"kind":"textbox","id":"sh/8jylgjep","slide":6,"text":"The consumer writes Parquet through the lakehouse writer. That writer emits an OpenLineage event with the output schema. Marquez stores the run history, and the lineage pipeline exports compact schema-change evidence to GraphDB.","textPreview":"The consumer writes Parquet through the lakehouse writer. That writer emits an OpenLineage event with the output schema. Marquez stores t...","textChars":228,"textLines":1,"bbox":[90,150,1040,104]}
+{"kind":"shape","id":"sh/6hg3etwj","slide":6,"bbox":[790,282,330,190]}
+{"kind":"textbox","id":"sh/hormd8f6","slide":6,"text":"GraphDB lineage nodes","textPreview":"GraphDB lineage nodes","textChars":21,"textLines":1,"bbox":[808,298,294,34]}
+{"kind":"textbox","id":"sh/gnilk3el","slide":6,"text":"DataCollectionRun\nSchemaVersion\nSchemaChange\naddsColumn / removesColumn / changesColumn","textPreview":"DataCollectionRun | SchemaVersion | SchemaChange | addsColumn / removesColumn / changesColumn","textChars":87,"textLines":4,"bbox":[808,338,294,118]}
+{"kind":"image","id":"im/614balw7","slide":6,"name":"","alt":"Marquez dataset job dataset lineage visual","bbox":[100,302,640,100]}
+{"kind":"notes","id":"nt/3rrguo","slide":6,"text":""}
+{"kind":"slide","id":"sl/kx3bzj","slide":7,"title":"DEMO PROVES SCHEMA-CHANGE LINEAGE WITH REAL CONSUMER OUTPUT","textShapes":9}
+{"kind":"shape","id":"sh/kjmlwj69","slide":7,"bbox":[80,56,1040,3]}
+{"kind":"shape","id":"sh/jidk3e5o","slide":7,"bbox":[80,642,1040,2]}
+{"kind":"textbox","id":"sh/yh4ju9oj","slide":7,"text":"DEMO PROVES SCHEMA-CHANGE LINEAGE WITH REAL CONSUMER OUTPUT","textPreview":"DEMO PROVES SCHEMA-CHANGE LINEAGE WITH REAL CONSUMER OUTPUT","textChars":59,"textLines":1,"bbox":[80,86,960,58]}
+{"kind":"textbox","id":"sh/xwv214ny","slide":7,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[1128,630,48,28]}
+{"kind":"shape","id":"sh/wvm1sz6d","slide":7,"bbox":[88,214,300,190]}
+{"kind":"textbox","id":"sh/butkzu5s","slide":7,"text":"Baseline","textPreview":"Baseline","textChars":8,"textLines":1,"bbox":[106,230,264,34]}
+{"kind":"textbox","id":"sh/atkjqpo7","slide":7,"text":"Run the real Kafka consumers.\nThey write the original meter-data and command-response schemas.","textPreview":"Run the real Kafka consumers. | They write the original meter-data and command-response schemas.","textChars":94,"textLines":2,"bbox":[106,270,264,118]}
+{"kind":"shape","id":"sh/9sb2x4nm","slide":7,"bbox":[490,214,300,190]}
+{"kind":"textbox","id":"sh/or21oz61","slide":7,"text":"Changed run","textPreview":"Changed run","textChars":11,"textLines":1,"bbox":[508,230,264,34]}
+{"kind":"textbox","id":"sh/25kv2xwf","slide":7,"text":"Run demo.run_changed_schema.\nIt preserves the latest real rows and adds campus context columns.","textPreview":"Run demo.run_changed_schema. | It preserves the latest real rows and adds campus context columns.","textChars":95,"textLines":2,"bbox":[508,270,264,118]}
+{"kind":"shape","id":"sh/36twv2d0","slide":7,"bbox":[892,214,300,190]}
+{"kind":"textbox","id":"sh/o72d47el","slide":7,"text":"Evidence","textPreview":"Evidence","textChars":8,"textLines":1,"bbox":[910,230,264,34]}
+{"kind":"textbox","id":"sh/p8bexcv6","slide":7,"text":"Run main.py and query GraphDB.\nThe graph returns the run ID that added each column.","textPreview":"Run main.py and query GraphDB. | The graph returns the run ID that added each column.","textChars":83,"textLines":2,"bbox":[910,270,264,118]}
+{"kind":"textbox","id":"sh/eh0vyxwj","slide":7,"text":"Added demo columns: run_location, department, building, demo_run_label, operator_group","textPreview":"Added demo columns: run_location, department, building, demo_run_label, operator_group","textChars":86,"textLines":1,"bbox":[145,488,990,46]}
+{"kind":"notes","id":"nt/kx3bzj","slide":7,"text":""}
+{"kind":"slide","id":"sl/dlmdaq","slide":8,"title":"GRAPHDB IDENTIFIES WHICH RUN ADDED EACH COLUMN","textShapes":18}
+{"kind":"shape","id":"sh/fqd4vyxw","slide":8,"bbox":[80,56,1040,3]}
+{"kind":"shape","id":"sh/0r6l43eh","slide":8,"bbox":[80,642,1040,2]}
+{"kind":"textbox","id":"sh/1sfmx8f2","slide":8,"text":"GRAPHDB IDENTIFIES WHICH RUN ADDED EACH COLUMN","textPreview":"GRAPHDB IDENTIFIES WHICH RUN ADDED EACH COLUMN","textChars":46,"textLines":1,"bbox":[80,86,960,58]}
+{"kind":"textbox","id":"sh/q143ytwf","slide":8,"text":"7","textPreview":"7","textChars":1,"textLines":1,"bbox":[1128,630,48,28]}
+{"kind":"shape","id":"sh/r2d4ryx0","slide":8,"bbox":[110,174,360,58]}
+{"kind":"textbox","id":"sh/s3ml0jel","slide":8,"text":"Process","textPreview":"Process","textChars":7,"textLines":1,"bbox":[124,189,332,34]}
+{"kind":"shape","id":"sh/d4vmtofq","slide":8,"bbox":[470,174,350,58]}
+{"kind":"textbox","id":"sh/axo3adwj","slide":8,"text":"Run","textPreview":"Run","textChars":3,"textLines":1,"bbox":[484,189,322,34]}
+{"kind":"shape","id":"sh/byx43id4","slide":8,"bbox":[820,174,300,58]}
+{"kind":"textbox","id":"sh/bi54zqtg","slide":8,"text":"Added column","textPreview":"Added column","textChars":12,"textLines":1,"bbox":[834,189,272,34]}
+{"kind":"shape","id":"sh/qhw3qlcv","slide":8,"bbox":[110,232,360,58]}
+{"kind":"textbox","id":"sh/dk7m10bm","slide":8,"text":"meter-data-pipeline","textPreview":"meter-data-pipeline","textChars":19,"textLines":1,"bbox":[124,246,332,34]}
+{"kind":"shape","id":"sh/cjelsvu1","slide":8,"bbox":[470,232,350,58]}
+{"kind":"textbox","id":"sh/zmp43ats","slide":8,"text":"OpenLineage run ID","textPreview":"OpenLineage run ID","textChars":18,"textLines":1,"bbox":[484,246,322,34]}
+{"kind":"shape","id":"sh/ylg3u5c7","slide":8,"bbox":[820,232,300,58]}
+{"kind":"textbox","id":"sh/lo7m50bi","slide":8,"text":"run_location","textPreview":"run_location","textChars":12,"textLines":1,"bbox":[834,246,272,34]}
+{"kind":"shape","id":"sh/0nylwvux","slide":8,"bbox":[110,290,360,58]}
+{"kind":"textbox","id":"sh/nqp47ato","slide":8,"text":"meter-data-pipeline","textPreview":"meter-data-pipeline","textChars":19,"textLines":1,"bbox":[124,304,332,34]}
+{"kind":"shape","id":"sh/mpg3y5c3","slide":8,"bbox":[470,290,350,58]}
+{"kind":"textbox","id":"sh/ilk7q9wb","slide":8,"text":"OpenLineage run ID","textPreview":"OpenLineage run ID","textChars":18,"textLines":1,"bbox":[484,304,322,34]}
+{"kind":"shape","id":"sh/jmtozedw","slide":8,"bbox":[820,290,300,58]}
+{"kind":"textbox","id":"sh/k72psjeh","slide":8,"text":"department","textPreview":"department","textChars":10,"textLines":1,"bbox":[834,304,272,34]}
+{"kind":"shape","id":"sh/58b61ov2","slide":8,"bbox":[110,348,360,58]}
+{"kind":"textbox","id":"sh/ah0nm9wf","slide":8,"text":"meter-data-pipeline","textPreview":"meter-data-pipeline","textChars":19,"textLines":1,"bbox":[124,362,332,34]}
+{"kind":"shape","id":"sh/vi9ovud0","slide":8,"bbox":[470,348,350,58]}
+{"kind":"textbox","id":"sh/wji5oze5","slide":8,"text":"OpenLineage run ID","textPreview":"OpenLineage run ID","textChars":18,"textLines":1,"bbox":[484,362,322,34]}
+{"kind":"shape","id":"sh/xkb6x4vq","slide":8,"bbox":[820,348,300,58]}
+{"kind":"textbox","id":"sh/ud47ytwj","slide":8,"text":"building","textPreview":"building","textChars":8,"textLines":1,"bbox":[834,362,272,34]}
+{"kind":"shape","id":"sh/fedo7yd4","slide":8,"bbox":[110,406,360,58]}
+{"kind":"textbox","id":"sh/p8faxsf6","slide":8,"text":"command-response-pipeline","textPreview":"command-response-pipeline","textChars":25,"textLines":1,"bbox":[124,420,332,34]}
+{"kind":"shape","id":"sh/4769onyl","slide":8,"bbox":[470,406,350,58]}
+{"kind":"textbox","id":"sh/36x8vixg","slide":8,"text":"OpenLineage run ID","textPreview":"OpenLineage run ID","textChars":18,"textLines":1,"bbox":[484,420,322,34]}
+{"kind":"shape","id":"sh/25ormdgv","slide":8,"bbox":[820,406,300,58]}
+{"kind":"textbox","id":"sh/h4fqtsfa","slide":8,"text":"operator_group","textPreview":"operator_group","textChars":14,"textLines":1,"bbox":[834,420,272,34]}
+{"kind":"textbox","id":"sh/g369knyp","slide":8,"text":"SPARQL pattern: SchemaChange -> observedInRun -> DataCollectionRun -> runId","textPreview":"SPARQL pattern: SchemaChange -> observedInRun -> DataCollectionRun -> runId","textChars":75,"textLines":1,"bbox":[145,565,990,42]}
+{"kind":"notes","id":"nt/dlmdaq","slide":8,"text":""}
+{"kind":"slide","id":"sl/65cjp9","slide":9,"title":"NOW LET US MOVE ONTO THE DEMONSTRATION","textShapes":3}
+{"kind":"shape","id":"sh/ruh4bi50","slide":9,"bbox":[80,56,1040,3]}
+{"kind":"shape","id":"sh/svq5kn6l","slide":9,"bbox":[80,642,1040,2]}
+{"kind":"textbox","id":"sh/twz6dsn6","slide":9,"text":"NOW LET US MOVE ONTO THE DEMONSTRATION","textPreview":"NOW LET US MOVE ONTO THE DEMONSTRATION","textChars":38,"textLines":1,"bbox":[80,86,960,58]}
+{"kind":"textbox","id":"sh/iponedoj","slide":9,"text":"8","textPreview":"8","textChars":1,"textLines":1,"bbox":[1128,630,48,28]}
+{"kind":"textbox","id":"sh/jqh47i54","slide":9,"text":"We will run the real consumers, add controlled schema changes, reload GraphDB, and query the run that introduced each new column.","textPreview":"We will run the real consumers, add controlled schema changes, reload GraphDB, and query the run that introduced each new column.","textChars":129,"textLines":1,"bbox":[180,260,920,120]}
+{"kind":"notes","id":"nt/65cjp9","slide":9,"text":""}
+{"kind":"slide","id":"sl/w55pl0","slide":10,"title":"WHAT THE TESTBED DEMONSTRATES","textShapes":12}
+{"kind":"shape","id":"sh/1g3ud4ra","slide":10,"bbox":[80,56,1040,3]}
+{"kind":"shape","id":"sh/etcvipsj","slide":10,"bbox":[80,642,1040,2]}
+{"kind":"textbox","id":"sh/fulcbu94","slide":10,"text":"WHAT THE TESTBED DEMONSTRATES","textPreview":"WHAT THE TESTBED DEMONSTRATES","textChars":29,"textLines":1,"bbox":[80,86,960,58]}
+{"kind":"textbox","id":"sh/sradgfat","slide":10,"text":"9","textPreview":"9","textChars":1,"textLines":1,"bbox":[1128,630,48,28]}
+{"kind":"textbox","id":"sh/dsju9kry","slide":10,"text":"The system turns raw pipeline activity into queryable metadata knowledge.","textPreview":"The system turns raw pipeline activity into queryable metadata knowledge.","textChars":73,"textLines":1,"bbox":[120,178,1040,64]}
+{"kind":"shape","id":"sh/qpsvepsn","slide":10,"bbox":[110,310,240,150]}
+{"kind":"textbox","id":"sh/rq1c7u98","slide":10,"text":"Datasets","textPreview":"Datasets","textChars":8,"textLines":1,"bbox":[128,326,204,34]}
+{"kind":"textbox","id":"sh/4natcfah","slide":10,"text":"What datasets exist and where they are stored.","textPreview":"What datasets exist and where they are stored.","textChars":46,"textLines":1,"bbox":[128,366,204,78]}
+{"kind":"shape","id":"sh/5oju5kr2","slide":10,"bbox":[390,310,240,150]}
+{"kind":"textbox","id":"sh/5gfix0ve","slide":10,"text":"Columns","textPreview":"Columns","textChars":7,"textLines":1,"bbox":[408,326,204,34]}
+{"kind":"textbox","id":"sh/4f6hovet","slide":10,"text":"What columns they contain and their data types.","textPreview":"What columns they contain and their data types.","textChars":47,"textLines":1,"bbox":[408,366,204,78]}
+{"kind":"shape","id":"sh/3ex0vqd8","slide":10,"bbox":[670,310,240,150]}
+{"kind":"textbox","id":"sh/idozmlw3","slide":10,"text":"Processes","textPreview":"Processes","textChars":9,"textLines":1,"bbox":[688,326,204,34]}
+{"kind":"textbox","id":"sh/hcfit0vi","slide":10,"text":"Which jobs consume and create datasets.","textPreview":"Which jobs consume and create datasets.","textChars":39,"textLines":1,"bbox":[688,366,204,78]}
+{"kind":"shape","id":"sh/gb6hkvex","slide":10,"bbox":[950,310,240,150]}
+{"kind":"textbox","id":"sh/vqx0rqxc","slide":10,"text":"Runs","textPreview":"Runs","textChars":4,"textLines":1,"bbox":[968,326,204,34]}
+{"kind":"textbox","id":"sh/up4zilwr","slide":10,"text":"Which run introduced a schema change.","textPreview":"Which run introduced a schema change.","textChars":37,"textLines":1,"bbox":[968,366,204,78]}
+{"kind":"textbox","id":"sh/tovipgf6","slide":10,"text":"Thank you","textPreview":"Thank you","textChars":9,"textLines":1,"bbox":[470,540,340,60]}
+{"kind":"notes","id":"nt/w55pl0","slide":10,"text":""}

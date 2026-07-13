@@ -7,82 +7,122 @@
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/TOR> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "TOR" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/attributeIds> a ns1:Column ;
     ns1:dataType "object" ;
+    ns1:name "attributeIds" ;
     ns1:nullCount 0 .
+
+<http://metadata-platform.com/data-representation/minio/meter-data/column/building> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:name "building" ;
+    ns1:nullCount 560 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/capturePeriod> a ns1:Column ;
     ns1:dataType "int64" ;
+    ns1:name "capturePeriod" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/classIds> a ns1:Column ;
     ns1:dataType "object" ;
+    ns1:name "classIds" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/data> a ns1:Column ;
     ns1:dataType "object" ;
+    ns1:name "data" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/dataObis> a ns1:Column ;
     ns1:dataType "object" ;
+    ns1:name "dataObis" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/dataTypes> a ns1:Column ;
     ns1:dataType "object" ;
+    ns1:name "dataTypes" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/debugServerTime> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "debugServerTime" ;
     ns1:nullCount 0 .
+
+<http://metadata-platform.com/data-representation/minio/meter-data/column/demo_run_label> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:name "demo_run_label" ;
+    ns1:nullCount 560 .
+
+<http://metadata-platform.com/data-representation/minio/meter-data/column/department> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:name "department" ;
+    ns1:nullCount 560 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/last_ntp_sync_time> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "last_ntp_sync_time" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/meterNumber> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "meterNumber" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/meter_category> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "meter_category" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/meter_manufacturer> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "meter_manufacturer" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/meter_type> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "meter_type" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/nodeId> a ns1:Column ;
     ns1:dataType "int64" ;
+    ns1:name "nodeId" ;
     ns1:nullCount 0 .
+
+<http://metadata-platform.com/data-representation/minio/meter-data/column/run_location> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:name "run_location" ;
+    ns1:nullCount 560 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/scalar> a ns1:Column ;
     ns1:dataType "object" ;
+    ns1:name "scalar" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/scalarObis> a ns1:Column ;
     ns1:dataType "object" ;
+    ns1:name "scalarObis" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/sensor_time> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "sensor_time" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/subType> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "subType" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/type> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "type" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/meter-data/column/uuid> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "uuid" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/enterprise-data/meter-data> a ns1:EnterpriseData ;
@@ -101,27 +141,32 @@
     ns1:stores <http://metadata-platform.com/data-representation/minio/meter-data> .
 
 <http://metadata-platform.com/data-representation/minio/meter-data> a ns1:DataRepresentation ;
-    ns1:columnCount 20 ;
+    ns1:columnCount 24 ;
     ns1:hasColumn <http://metadata-platform.com/data-representation/minio/meter-data/column/TOR>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/attributeIds>,
+        <http://metadata-platform.com/data-representation/minio/meter-data/column/building>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/capturePeriod>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/classIds>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/data>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/dataObis>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/dataTypes>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/debugServerTime>,
+        <http://metadata-platform.com/data-representation/minio/meter-data/column/demo_run_label>,
+        <http://metadata-platform.com/data-representation/minio/meter-data/column/department>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/last_ntp_sync_time>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/meterNumber>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/meter_category>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/meter_manufacturer>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/meter_type>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/nodeId>,
+        <http://metadata-platform.com/data-representation/minio/meter-data/column/run_location>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/scalar>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/scalarObis>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/sensor_time>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/subType>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/type>,
         <http://metadata-platform.com/data-representation/minio/meter-data/column/uuid> ;
-    ns1:parquetPath "s3://raw/meter-data/2026/05/26/meter-data_20260526_210307.parquet" ;
-    ns1:rowCount 3675 .
+    ns1:name "meter-data" ;
+    ns1:parquetPath "s3://raw/meter-data/2026/07/13/meter-data_20260713_112754.parquet" ;
+    ns1:rowCount 562 .
 

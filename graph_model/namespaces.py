@@ -12,6 +12,9 @@ EX = Namespace("http://metadata-platform.com/")
 # StorageSystem
 # Column
 # DataCollectionProcess
+# DataCollectionRun
+# SchemaVersion
+# SchemaChange
 #
 # Properties
 #
@@ -31,3 +34,18 @@ EX = Namespace("http://metadata-platform.com/")
 # creates
 # consumes
 # name
+# realizes
+# runId
+# eventTime
+# hasSchemaVersion
+# producedSchemaVersion
+# schemaOf
+# schemaFingerprint
+# previousSchemaVersion
+# nextSchemaVersion
+# observedInRun
+# addsColumn
+# removesColumn
+# changesColumn
+# replacesColumn
+# ordinalPosition

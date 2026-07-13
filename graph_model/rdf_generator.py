@@ -109,6 +109,12 @@ def generate_metadata_graph(dataset_metadata):
 
     graph.add((
         data_representation_uri,
+        EX.name,
+        Literal(dataset_metadata.dataset_name)
+    ))
+
+    graph.add((
+        data_representation_uri,
         EX.rowCount,
         Literal(dataset_metadata.row_count)
     ))
@@ -195,6 +201,12 @@ def generate_metadata_graph(dataset_metadata):
             column_uri,
             RDF.type,
             EX.Column
+        ))
+
+        graph.add((
+            column_uri,
+            EX.name,
+            Literal(column.column_name)
         ))
 
         graph.add((

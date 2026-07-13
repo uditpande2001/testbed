@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 from metadata_extraction.dataset_discovery import list_parquet_objects
 from metadata_extraction.schema_extractor import extract_schema_metadata
 
@@ -26,17 +24,33 @@ def aggregate_datasets(bucket_name="raw"):
             aggregated[name] = metadata
 
         else:
-            # accumulate row counts
-            aggregated[name].row_count += metadata.row_count
+            existing_dataset = aggregated[name]
+            previous_row_count = existing_dataset.row_count
 
-            # merge null counts column-wise
             existing_cols = {
                 c.column_name: c
-                for c in aggregated[name].columns
+                for c in existing_dataset.columns
+            }
+            incoming_cols = {
+                c.column_name: c
+                for c in metadata.columns
             }
 
-            for col in metadata.columns:
-                if col.column_name in existing_cols:
-                    existing_cols[col.column_name].null_count += col.null_count
+            # A column absent from a file is null for every row in that file.
+            for column_name, existing_column in existing_cols.items():
+                incoming_column = incoming_cols.get(column_name)
+                if incoming_column is None:
+                    existing_column.null_count += metadata.row_count
+                else:
+                    existing_column.null_count += incoming_column.null_count
+
+            # A column introduced later was null for previous rows.
+            for column_name, incoming_column in incoming_cols.items():
+                if column_name not in existing_cols:
+                    incoming_column.null_count += previous_row_count
+                    existing_dataset.columns.append(incoming_column)
+
+            existing_dataset.row_count += metadata.row_count
+            existing_dataset.column_count = len(existing_dataset.columns)
 
     return list(aggregated.values())

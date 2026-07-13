@@ -6,6 +6,8 @@ import pandas as pd
 from storage.lakehouse.minio_client import client
 
 from lineage.openlineage_emitter import (
+    build_schema_facet,
+    dataframe_schema_fields,
     start_run,
     complete_run,
     fail_run,
@@ -43,6 +45,8 @@ def upload_batch_to_lake(
         return
 
     df = pd.DataFrame(messages)
+    schema_fields = dataframe_schema_fields(df)
+    schema_facet = build_schema_facet(schema_fields)
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
@@ -75,6 +79,7 @@ def upload_batch_to_lake(
         input_dataset=source_name,
         output_namespace="minio",
         output_dataset=dataset_name,
+        output_dataset_facets=schema_facet,
     )
 
     try:
@@ -92,6 +97,7 @@ def upload_batch_to_lake(
             input_dataset=source_name,
             output_namespace="minio",
             output_dataset=dataset_name,
+            output_dataset_facets=schema_facet,
         )
 
         print(f"Uploaded: {object_path}")
@@ -105,6 +111,7 @@ def upload_batch_to_lake(
             input_dataset=source_name,
             output_namespace="minio",
             output_dataset=dataset_name,
+            output_dataset_facets=schema_facet,
         )
 
         raise

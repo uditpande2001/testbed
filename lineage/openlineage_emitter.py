@@ -3,8 +3,9 @@ from datetime import datetime, timezone
 
 from openlineage.client import OpenLineageClient
 from openlineage.client.run import (
-    Dataset,
+    InputDataset,
     Job,
+    OutputDataset,
     Run,
     RunEvent,
     RunState,
@@ -20,6 +21,42 @@ client = OpenLineageClient(
     url="http://localhost:5000"
 )
 
+SCHEMA_FACET_URL = (
+    "https://openlineage.io/spec/facets/1-2-0/"
+    "SchemaDatasetFacet.json#/$defs/SchemaDatasetFacet"
+)
+
+PRODUCER = "https://github.com/your-project/metadata-testbed"
+
+
+def dataframe_schema_fields(dataframe):
+    """
+    Convert a pandas dataframe schema into OpenLineage schema fields.
+    """
+
+    return [
+        {
+            "name": str(column),
+            "type": str(dataframe[column].dtype),
+            "ordinal_position": position,
+        }
+        for position, column in enumerate(dataframe.columns, start=1)
+    ]
+
+
+def build_schema_facet(schema_fields):
+    """
+    Build the standard OpenLineage schema dataset facet.
+    """
+
+    return {
+        "schema": {
+            "_producer": PRODUCER,
+            "_schemaURL": SCHEMA_FACET_URL,
+            "fields": list(schema_fields),
+        }
+    }
+
 
 # -------------------------------------------------------------------
 # Internal helper
@@ -33,6 +70,8 @@ def _emit_event(
     input_dataset: str,
     output_namespace: str,
     output_dataset: str,
+    input_dataset_facets=None,
+    output_dataset_facets=None,
 ):
     """
     Emit a single OpenLineage event.
@@ -47,18 +86,20 @@ def _emit_event(
             name=job_name,
         ),
         inputs=[
-            Dataset(
+            InputDataset(
                 namespace=input_namespace,
                 name=input_dataset,
+                facets=input_dataset_facets or {},
             )
         ],
         outputs=[
-            Dataset(
+            OutputDataset(
                 namespace=output_namespace,
                 name=output_dataset,
+                facets=output_dataset_facets or {},
             )
         ],
-        producer="https://github.com/your-project/metadata-testbed",
+        producer=PRODUCER,
     )
 
     client.emit(event)
@@ -74,6 +115,8 @@ def start_run(
     input_dataset: str,
     output_namespace: str,
     output_dataset: str,
+    input_dataset_facets=None,
+    output_dataset_facets=None,
 ) -> str:
 
     run_id = str(uuid.uuid4())
@@ -86,6 +129,8 @@ def start_run(
         input_dataset=input_dataset,
         output_namespace=output_namespace,
         output_dataset=output_dataset,
+        input_dataset_facets=input_dataset_facets,
+        output_dataset_facets=output_dataset_facets,
     )
 
     return run_id
@@ -98,6 +143,8 @@ def complete_run(
     input_dataset: str,
     output_namespace: str,
     output_dataset: str,
+    input_dataset_facets=None,
+    output_dataset_facets=None,
 ):
 
     _emit_event(
@@ -108,6 +155,8 @@ def complete_run(
         input_dataset=input_dataset,
         output_namespace=output_namespace,
         output_dataset=output_dataset,
+        input_dataset_facets=input_dataset_facets,
+        output_dataset_facets=output_dataset_facets,
     )
 
 
@@ -118,6 +167,8 @@ def fail_run(
     input_dataset: str,
     output_namespace: str,
     output_dataset: str,
+    input_dataset_facets=None,
+    output_dataset_facets=None,
 ):
 
     _emit_event(
@@ -128,4 +179,6 @@ def fail_run(
         input_dataset=input_dataset,
         output_namespace=output_namespace,
         output_dataset=output_dataset,
+        input_dataset_facets=input_dataset_facets,
+        output_dataset_facets=output_dataset_facets,
     )

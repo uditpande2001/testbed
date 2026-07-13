@@ -8,6 +8,27 @@ GRAPHDB_URL = (
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+def clear_repository():
+    """
+    Remove existing triples so GraphDB reflects the latest generated TTL files.
+    """
+
+    response = requests.delete(GRAPHDB_URL)
+
+    if response.status_code in (200, 204):
+
+        print("Cleared GraphDB repository")
+
+    else:
+
+        print(
+            f"Clear failed ({response.status_code})"
+        )
+
+        print(response.text)
+
+
 def upload_ttl(ttl_file):
     """
     Upload a Turtle file to GraphDB.

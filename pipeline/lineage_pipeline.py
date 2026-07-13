@@ -16,9 +16,16 @@ def run_lineage_pipeline():
 
     jobs = client.get_jobs()
 
-    print(f"Found {len(jobs)} jobs")
+    try:
+        events = client.get_lineage_events()
+    except Exception as exc:
+        print(f"Could not read Marquez schema events: {exc}")
+        print("Continuing with process-level lineage only.")
+        events = []
 
-    graph = generate_lineage_graph(jobs)
+    print(f"Found {len(jobs)} jobs and {len(events)} lineage events")
+
+    graph = generate_lineage_graph(jobs, events)
 
     output_file = "metadata/lineage.ttl"
 

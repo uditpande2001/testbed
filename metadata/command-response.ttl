@@ -5,28 +5,54 @@
     ns1:hasEnterpriseData <http://metadata-platform.com/enterprise-data/command-response> ;
     ns1:hasStorageSystem <http://metadata-platform.com/storage-system/minio> .
 
+<http://metadata-platform.com/data-representation/minio/command-response/column/building> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:name "building" ;
+    ns1:nullCount 103 .
+
 <http://metadata-platform.com/data-representation/minio/command-response/column/commandId> a ns1:Column ;
     ns1:dataType "int64" ;
+    ns1:name "commandId" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/command-response/column/commandType> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "commandType" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/command-response/column/debugServerTime> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "debugServerTime" ;
     ns1:nullCount 0 .
+
+<http://metadata-platform.com/data-representation/minio/command-response/column/department> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:name "department" ;
+    ns1:nullCount 103 .
 
 <http://metadata-platform.com/data-representation/minio/command-response/column/nodeId> a ns1:Column ;
     ns1:dataType "int64" ;
+    ns1:name "nodeId" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/data-representation/minio/command-response/column/operationResults> a ns1:Column ;
     ns1:dataType "object" ;
-    ns1:nullCount 284 .
+    ns1:name "operationResults" ;
+    ns1:nullCount 97 .
+
+<http://metadata-platform.com/data-representation/minio/command-response/column/operator_group> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:name "operator_group" ;
+    ns1:nullCount 103 .
+
+<http://metadata-platform.com/data-representation/minio/command-response/column/run_location> a ns1:Column ;
+    ns1:dataType "str" ;
+    ns1:name "run_location" ;
+    ns1:nullCount 103 .
 
 <http://metadata-platform.com/data-representation/minio/command-response/column/status> a ns1:Column ;
     ns1:dataType "str" ;
+    ns1:name "status" ;
     ns1:nullCount 0 .
 
 <http://metadata-platform.com/enterprise-data/command-response> a ns1:EnterpriseData ;
@@ -45,13 +71,18 @@
     ns1:stores <http://metadata-platform.com/data-representation/minio/command-response> .
 
 <http://metadata-platform.com/data-representation/minio/command-response> a ns1:DataRepresentation ;
-    ns1:columnCount 6 ;
-    ns1:hasColumn <http://metadata-platform.com/data-representation/minio/command-response/column/commandId>,
+    ns1:columnCount 10 ;
+    ns1:hasColumn <http://metadata-platform.com/data-representation/minio/command-response/column/building>,
+        <http://metadata-platform.com/data-representation/minio/command-response/column/commandId>,
         <http://metadata-platform.com/data-representation/minio/command-response/column/commandType>,
         <http://metadata-platform.com/data-representation/minio/command-response/column/debugServerTime>,
+        <http://metadata-platform.com/data-representation/minio/command-response/column/department>,
         <http://metadata-platform.com/data-representation/minio/command-response/column/nodeId>,
         <http://metadata-platform.com/data-representation/minio/command-response/column/operationResults>,
+        <http://metadata-platform.com/data-representation/minio/command-response/column/operator_group>,
+        <http://metadata-platform.com/data-representation/minio/command-response/column/run_location>,
         <http://metadata-platform.com/data-representation/minio/command-response/column/status> ;
-    ns1:parquetPath "s3://raw/command-response/2026/06/05/command-response_20260605_135030.parquet" ;
-    ns1:rowCount 1482 .
+    ns1:name "command-response" ;
+    ns1:parquetPath "s3://raw/command-response/2026/07/13/command-response_20260713_112746.parquet" ;
+    ns1:rowCount 105 .
 
